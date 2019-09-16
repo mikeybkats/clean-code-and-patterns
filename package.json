@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^11.13.4"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }

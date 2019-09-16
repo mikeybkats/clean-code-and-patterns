@@ -19,6 +19,7 @@ function CCounter() {
   }
 }
 
+// notice that we're not using the new Object() syntax to instantiate. That doesn't work with the above syntax.
 const ClosureCounter = CCounter();
 
 console.log("Simulating private functions with closures");
@@ -31,38 +32,6 @@ ClosureCounter.increment();
 ClosureCounter.increment();
 
 console.log("new value: ", ClosureCounter.value());
-
-
-// class closure
-class CounterNew {
-  private counter: number = 0;
-
-  private changeBy(val: number) {
-    this.counter += val;
-  }
-
-  public increment(): void { 
-    this.changeBy(1); 
-  }
-  
-  public decrement(): void { 
-    this.changeBy(-1); 
-  }
-
-  public value(): number { 
-    return this.counter; 
-  }
-}
-
-const MyCounter = new CounterNew();
-
-console.log("emulating private methods with classes: ");
-console.log(MyCounter.value()); // logs 0
-MyCounter.increment();
-MyCounter.increment();
-console.log(MyCounter.value()); // logs 2
-MyCounter.decrement();
-console.log(MyCounter.value()); // logs 1
 
 const Doggy = function(){
   name: "";
@@ -117,3 +86,33 @@ myNonDoggy.giveName("Tina");
 myNonDoggy.sayName();
 console.log(myNonDoggy);
 
+// class closure
+class CounterNew {
+  private counter: number = 0;
+
+  private changeBy(val: number) {
+    this.counter += val;
+  }
+
+  public increment(): void { 
+    this.changeBy(1); 
+  }
+  
+  public decrement(): void { 
+    this.changeBy(-1); 
+  }
+
+  public value(): number { 
+    return this.counter; 
+  }
+}
+
+const MyCounter = new CounterNew();
+
+console.log("emulating private methods with classes: ");
+console.log(MyCounter.value()); // logs 0
+MyCounter.increment();
+MyCounter.increment();
+console.log(MyCounter.value()); // logs 2
+MyCounter.decrement();
+console.log(MyCounter.value()); // logs 1
