@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var battle_1 = require("./battle");
+var enemy_1 = require("./enemy");
+var battle = new battle_1.Battle();
+var slime = new enemy_1.Slime(battle, "Slime 1");
+var slime2 = new enemy_1.Slime(battle, "Slime 2");
+battle._attacker = 1;
+battle._attackerTarget = 0;
+battle.attack();
+slime.display();
+slime2.display();
+battle._attacker = 0;
+battle._attackerTarget = 1;
+battle.attack();
+slime.display();
+slime2.display();
