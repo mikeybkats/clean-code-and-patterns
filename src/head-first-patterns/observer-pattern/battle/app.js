@@ -23,5 +23,25 @@ var slime2 = new enemy_1.Slime({
         attackPower: 5,
     },
 });
+var slime3 = new enemy_1.Slime({
+    battle: battle,
+    params: {
+        name: "Mega Slime",
+        hitPointsBase: 10,
+        hitPointsCurrent: 10,
+        defense: 10,
+        attackPower: 10,
+    },
+});
+var slime4 = new enemy_1.Slime({
+    battle: battle,
+    params: {
+        name: "Terminator Slime",
+        hitPointsBase: 100,
+        hitPointsCurrent: 100,
+        defense: 10,
+        attackPower: 10,
+    },
+});
 var controller = new battle_1.BattleController(battle);
 controller.run();

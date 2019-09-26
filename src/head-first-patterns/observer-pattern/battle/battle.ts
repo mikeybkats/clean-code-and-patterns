@@ -8,31 +8,31 @@ export interface IBattleState {
 
 export class BattleController {
     battle: IBattleScenario;
-    players: ICharacter[];
 
     constructor(battle: IBattleScenario) {
         this.battle = battle;
-        this.players = battle.observers;
     }
 
     public run() {
         // the random character chooses who to attack
         const randomPlayer = Math.floor(
-            Math.random() * Math.floor(this.players.length)
+            Math.random() * Math.floor(this.battle.observers.length)
         );
         // set the turn to start on the random character
         this.battle._turn = randomPlayer;
-        console.log(`${this.players[randomPlayer].name} starts the fight!`);
+        console.log(
+            `${this.battle.observers[randomPlayer].name} starts the fight!`
+        );
 
         // random player attacks another random player
-        this.battle.attack(this.chooseRandomPlayer(this.players));
+        this.battle.attack(this.chooseRandomPlayer(this.battle.observers));
 
         // until only one observer is left
         while (this.battle.observers.length > 1) {
             console.log(
                 `${this.battle.observers[this.battle.turnIndex].name}'s turn! HP: ${this.battle.observers[this.battle.turnIndex].hitPointsCurrent}\/${this.battle.observers[this.battle.turnIndex].hitPointsBase}`
             );
-            this.battle.attack(this.chooseRandomPlayer(this.players));
+            this.battle.attack(this.chooseRandomPlayer(this.battle.observers));
         }
 
         if (this.battle.observers.length === 1) {

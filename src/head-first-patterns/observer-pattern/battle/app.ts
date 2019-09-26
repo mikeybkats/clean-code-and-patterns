@@ -23,6 +23,26 @@ const slime2 = new Slime({
         attackPower: 5,
     },
 });
+const slime3 = new Slime({
+    battle,
+    params: {
+        name: "Mega Slime",
+        hitPointsBase: 10,
+        hitPointsCurrent: 10,
+        defense: 10,
+        attackPower: 10,
+    },
+});
+const slime4 = new Slime({
+    battle,
+    params: {
+        name: "Terminator Slime",
+        hitPointsBase: 100,
+        hitPointsCurrent: 100,
+        defense: 10,
+        attackPower: 10,
+    },
+});
 
 const controller = new BattleController(battle);
 controller.run();
