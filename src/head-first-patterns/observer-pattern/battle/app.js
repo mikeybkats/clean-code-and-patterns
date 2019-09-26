@@ -9,7 +9,7 @@ var slime = new enemy_1.Slime({
         name: "Little Slime",
         hitPointsBase: 4,
         hitPointsCurrent: 4,
-        defense: 1,
+        defense: 5,
         attackPower: 1,
     },
 });
@@ -29,7 +29,7 @@ var slime3 = new enemy_1.Slime({
         name: "Mega Slime",
         hitPointsBase: 10,
         hitPointsCurrent: 10,
-        defense: 10,
+        defense: 0,
         attackPower: 10,
     },
 });
@@ -39,7 +39,7 @@ var slime4 = new enemy_1.Slime({
         name: "Terminator Slime",
         hitPointsBase: 100,
         hitPointsCurrent: 100,
-        defense: 10,
+        defense: 0,
         attackPower: 10,
     },
 });
