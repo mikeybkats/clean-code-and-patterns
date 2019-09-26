@@ -8,25 +8,53 @@ export enum characterState {
     DEAD = "dead",
 }
 
-export class Slime implements IObserver, ICharacter {
+interface IEnemyProps {
+    battle: IBattleScenario;
+    params?: {
+        name: string;
+        hitPointsBase?: number;
+        hitPointsCurrent?: number;
+        defense?: number;
+        attackPower?: number;
+    };
+}
+
+export class Enemy implements IObserver, ICharacter {
     public attackPower: number = 1;
     public defense: number = 1;
-    public hitPointsBase: number = 5;
-    public hitPointsCurrent: number = 5;
-    public name: string = "Slime";
+    public hitPointsBase: number = 1;
+    public hitPointsCurrent: number = 1;
+    public name: string = "enemy";
+    public id = this.name + Math.floor(Math.random() * Math.floor(100));
 
     public battle: IBattleScenario;
     public characterState: characterState;
 
-    constructor(battle: IBattleScenario, name?: string) {
-        this.battle = battle;
-        battle.registerObserver(this);
+    constructor(props: IEnemyProps) {
+        this.battle = props.battle;
+        props.battle.registerObserver(this);
+
         this.characterState = this.calculateCharacterState(
             this.hitPointsCurrent
         );
 
-        if (name) {
-            this.name = name;
+        if (props.params) {
+            if (props.params.name) {
+                this.name = props.params.name;
+            }
+            if (props.params.hitPointsBase) {
+                this.hitPointsBase = props.params.hitPointsBase;
+            }
+            if (props.params.hitPointsCurrent) {
+                this.hitPointsCurrent = props.params.hitPointsCurrent;
+            }
+            if (props.params.defense) {
+                this.defense = props.params.defense;
+            }
+            if (props.params.attackPower) {
+                this.attackPower = props.params.attackPower;
+            }
+            this.id = this.name + Math.floor(Math.random() * Math.floor(100));
         }
     }
 
@@ -38,22 +66,31 @@ export class Slime implements IObserver, ICharacter {
     public calculateAttack(state: IBattleState): number {
         let hitPoints = this.hitPointsCurrent;
         let attack =
-            this.battle.observers[state.attackerIndex].attackPower -
-            this.defense;
+            Math.floor(
+                Math.random() *
+                    Math.floor(
+                        this.battle.observers[state.characterTurnIndex]
+                            .attackPower
+                    )
+            ) - this.defense;
         if (attack <= 0) {
             attack = 1;
         }
+        console.log(`For ${attack} point${attack > 1 ? "s" : ""} of damage!`);
         return hitPoints - attack;
     }
 
     public calculateCharacterState(hitPoints: number): characterState {
-        if (hitPoints > 1) {
+        if (hitPoints > 0) {
             return characterState.CONSCIOUS;
         }
-        if (hitPoints < 1) {
+        if (hitPoints < 0) {
             if (hitPoints <= -10) {
+                console.log(`${this.name} has been killed.`);
                 return characterState.DEAD;
             }
+            console.log(`${this.name} has been knocked unconscious.`);
+            //console.log(this.battle.observers);
             return characterState.UNCONSCIOUS;
         }
     }
@@ -62,21 +99,17 @@ export class Slime implements IObserver, ICharacter {
         this.characterState = this.calculateCharacterState(
             this.hitPointsCurrent
         );
+        if (
+            this.characterState === characterState.UNCONSCIOUS ||
+            this.characterState === characterState.DEAD
+        ) {
+            this.battle.removeObserver(this);
+        }
     }
 
     public display() {
         console.log(
-            `${this.name} has ${
-                this.hitPointsCurrent
-            } hit points remaining. They are currently ${
-                this.characterState
-            } and ${
-                this.characterState === characterState.CONSCIOUS
-                    ? "still fighting!"
-                    : this.characterState === characterState.UNCONSCIOUS
-                    ? "knocked down"
-                    : "dead... uh oh. That ain't good"
-            }.`
+            `${this.name} has ${this.hitPointsCurrent} hit points left.`
         );
     }
 
@@ -106,5 +139,11 @@ export class Slime implements IObserver, ICharacter {
 
     get _hitPoints() {
         return this.hitPointsCurrent;
+    }
+}
+
+export class Slime extends Enemy {
+    constructor(props: IEnemyProps) {
+        super(props);
     }
 }

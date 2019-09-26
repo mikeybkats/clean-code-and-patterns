@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var characterState;
 (function (characterState) {
@@ -6,70 +19,92 @@ var characterState;
     characterState["UNCONSCIOUS"] = "unconscious";
     characterState["DEAD"] = "dead";
 })(characterState = exports.characterState || (exports.characterState = {}));
-var Slime = /** @class */ (function () {
-    function Slime(battle, name) {
+var Enemy = /** @class */ (function () {
+    function Enemy(props) {
         this.attackPower = 1;
         this.defense = 1;
-        this.hitPointsBase = 5;
-        this.hitPointsCurrent = 5;
-        this.name = "Slime";
-        this.battle = battle;
-        battle.registerObserver(this);
+        this.hitPointsBase = 1;
+        this.hitPointsCurrent = 1;
+        this.name = "enemy";
+        this.id = this.name + Math.floor(Math.random() * Math.floor(100));
+        this.battle = props.battle;
+        props.battle.registerObserver(this);
         this.characterState = this.calculateCharacterState(this.hitPointsCurrent);
-        if (name) {
-            this.name = name;
+        if (props.params) {
+            if (props.params.name) {
+                this.name = props.params.name;
+            }
+            if (props.params.hitPointsBase) {
+                this.hitPointsBase = props.params.hitPointsBase;
+            }
+            if (props.params.hitPointsCurrent) {
+                this.hitPointsCurrent = props.params.hitPointsCurrent;
+            }
+            if (props.params.defense) {
+                this.defense = props.params.defense;
+            }
+            if (props.params.attackPower) {
+                this.attackPower = props.params.attackPower;
+            }
+            this.id = this.name + Math.floor(Math.random() * Math.floor(100));
         }
     }
-    Slime.prototype.calculateAttack = function (state) {
-        var hitPoints = this.hitPointsCurrent;
-        var attack = this.battle.observers[state.attackerIndex].attackPower -
-            this.defense;
-        if (attack <= 0) {
-            attack = 1;
-        }
-        return hitPoints - attack;
-    };
-    Slime.prototype.receiveAttack = function (state) {
+    Enemy.prototype.receiveAttack = function (state) {
         this.hitPointsCurrent = this.calculateAttack(state);
         this.update(state);
     };
-    Slime.prototype.calculateCharacterState = function (hitPoints) {
-        if (hitPoints > 1) {
+    Enemy.prototype.calculateAttack = function (state) {
+        var hitPoints = this.hitPointsCurrent;
+        var attack = Math.floor(Math.random() *
+            Math.floor(this.battle.observers[state.characterTurnIndex]
+                .attackPower)) - this.defense;
+        if (attack <= 0) {
+            attack = 1;
+        }
+        console.log("For " + attack + " point" + (attack > 1 ? "s" : "") + " of damage!");
+        return hitPoints - attack;
+    };
+    Enemy.prototype.calculateCharacterState = function (hitPoints) {
+        if (hitPoints > 0) {
             return characterState.CONSCIOUS;
         }
-        if (hitPoints < 1) {
+        if (hitPoints < 0) {
             if (hitPoints <= -10) {
+                console.log(this.name + " has been killed.");
                 return characterState.DEAD;
             }
+            console.log(this.name + " has been knocked unconscious.");
+            //console.log(this.battle.observers);
             return characterState.UNCONSCIOUS;
         }
     };
-    Slime.prototype.update = function (state) {
+    Enemy.prototype.update = function (state) {
         this.characterState = this.calculateCharacterState(this.hitPointsCurrent);
+        if (this.characterState === characterState.UNCONSCIOUS ||
+            this.characterState === characterState.DEAD) {
+            this.battle.removeObserver(this);
+        }
     };
-    Slime.prototype.display = function () {
-        console.log(this.name + " has " + this.hitPointsCurrent + " hit points remaining. They are currently " + this.characterState + " and " + (this.characterState === characterState.CONSCIOUS
-            ? "still fighting!"
-            : this.characterState === characterState.UNCONSCIOUS
-                ? "knocked down"
-                : "dead... uh oh. That ain't good") + ".");
+    Enemy.prototype.display = function () {
+        console.log(this.name + " has " + this.hitPointsCurrent + " hit points left.");
     };
-    Slime.prototype.hitPointsBelowBase = function () {
+    Enemy.prototype.hitPointsBelowBase = function () {
         if (this.hitPointsCurrent < this.hitPointsBase) {
             return true;
         }
         return false;
     };
-    Slime.prototype.hitPointsAboveBase = function () {
+    Enemy.prototype.hitPointsAboveBase = function () {
         if (this.hitPointsCurrent > this.hitPointsBase) {
             return true;
         }
         return false;
     };
-    Object.defineProperty(Slime.prototype, "_hitPoints", {
+    Object.defineProperty(Enemy.prototype, "_hitPoints", {
         get: function () {
             return this.hitPointsCurrent;
         },
+        // this set method could be used to set hit points directly if a character gets healed or regenerates or rests at an inn.
         set: function (points) {
             if (this.hitPointsBelowBase()) {
                 this.hitPointsCurrent = this.hitPointsCurrent + points;
@@ -81,6 +116,14 @@ var Slime = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    return Slime;
+    return Enemy;
 }());
+exports.Enemy = Enemy;
+var Slime = /** @class */ (function (_super) {
+    __extends(Slime, _super);
+    function Slime(props) {
+        return _super.call(this, props) || this;
+    }
+    return Slime;
+}(Enemy));
 exports.Slime = Slime;

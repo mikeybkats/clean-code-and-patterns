@@ -1,18 +1,28 @@
-import { Battle } from "./battle";
+import { Battle, BattleController } from "./battle";
 import { Slime } from "./enemy";
+import { ICharacter } from "./enemy.props";
 
 const battle = new Battle();
-const slime = new Slime(battle, "Slime 1");
-const slime2 = new Slime(battle, "Slime 2");
+const slime = new Slime({
+    battle,
+    params: {
+        name: "Little Slime",
+        hitPointsBase: 4,
+        hitPointsCurrent: 4,
+        defense: 1,
+        attackPower: 1,
+    },
+});
+const slime2 = new Slime({
+    battle,
+    params: {
+        name: "Big Slime",
+        hitPointsBase: 5,
+        hitPointsCurrent: 5,
+        defense: 0,
+        attackPower: 5,
+    },
+});
 
-battle._attacker = 1;
-battle._attackerTarget = 0;
-battle.attack();
-slime.display();
-slime2.display();
-
-battle._attacker = 0;
-battle._attackerTarget = 1;
-battle.attack();
-slime.display();
-slime2.display();
+const controller = new BattleController(battle);
+controller.run();

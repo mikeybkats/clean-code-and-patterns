@@ -6,8 +6,10 @@ export interface ICharacter extends IObserver {
     attackPower: number;
     defense: number;
     hitPointsBase: number;
+    hitPointsCurrent: number;
     name: string;
     characterState: characterState;
+    id: string;
 
     receiveAttack: (state: IBattleState) => void;
     calculateCharacterState: (hitPoints: number) => void;

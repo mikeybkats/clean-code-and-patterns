@@ -6,9 +6,12 @@ export interface IBattleScenario {
     removeObserver: (observer: IObserver) => void;
     notifyObservers: () => void;
     attack: (index: number) => void;
-    observers: IObserver[] & ICharacter[];
+    observers: ICharacter[];
+    _turn: number;
+    turnIndex: number;
 }
 
 export interface IObserver {
     update: (state: IBattleState) => void;
+    id: string;
 }

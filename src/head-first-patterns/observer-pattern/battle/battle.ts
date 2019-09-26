@@ -3,8 +3,58 @@ import { ICharacter } from "./enemy.props";
 
 export interface IBattleState {
     numberOfTurns: number;
-    attackerIndex: number;
-    attackTargetIndex: number;
+    characterTurnIndex: number;
+}
+
+export class BattleController {
+    battle: IBattleScenario;
+    players: ICharacter[];
+
+    constructor(battle: IBattleScenario) {
+        this.battle = battle;
+        this.players = battle.observers;
+    }
+
+    public run() {
+        // the random character chooses who to attack
+        const randomPlayer = Math.floor(
+            Math.random() * Math.floor(this.players.length)
+        );
+        // set the turn to start on the random character
+        this.battle._turn = randomPlayer;
+        console.log(`${this.players[randomPlayer].name} starts the fight!`);
+
+        // random player attacks another random player
+        this.battle.attack(this.chooseRandomPlayer(this.players));
+
+        // until only one observer is left
+        while (this.battle.observers.length > 1) {
+            console.log(
+                `${this.battle.observers[this.battle.turnIndex].name}'s turn! HP: ${this.battle.observers[this.battle.turnIndex].hitPointsCurrent}\/${this.battle.observers[this.battle.turnIndex].hitPointsBase}`
+            );
+            this.battle.attack(this.chooseRandomPlayer(this.players));
+        }
+
+        if (this.battle.observers.length === 1) {
+            console.log(
+                `${this.battle.observers[this.battle.turnIndex].name} has won the battle!`
+            );
+            return 0;
+        }
+    }
+
+    private chooseRandomPlayer(players: ICharacter[]) {
+        let randomPlayer = Math.floor(
+            Math.random() * Math.floor(players.length)
+        );
+        while (randomPlayer === this.battle.turnIndex) {
+            randomPlayer = Math.floor(
+                Math.random() * Math.floor(players.length)
+            );
+        }
+
+        return randomPlayer;
+    }
 }
 
 export class Battle implements IBattleScenario {
@@ -18,9 +68,7 @@ export class Battle implements IBattleScenario {
         // how many total player turns ?
         numberOfTurns: 0,
         // who's turn is it?
-        attackerIndex: 0,
-        // who are they attacking? P or E?
-        attackTargetIndex: 0,
+        characterTurnIndex: 0,
     };
 
     public registerObserver(observer: ICharacter) {
@@ -29,8 +77,9 @@ export class Battle implements IBattleScenario {
     }
 
     public removeObserver(observer: ICharacter) {
+        console.log(`Removing ${observer.name} from the game!`);
         this.observers = this.observers.filter((targetObserver: IObserver) => {
-            targetObserver !== observer;
+            return targetObserver.id !== observer.id;
         });
         this.resetNumberOfTurns();
     }
@@ -41,40 +90,29 @@ export class Battle implements IBattleScenario {
         });
     }
 
-    public attack() {
+    public attack(targetIndex: number) {
         console.log(
-            `${this.observers[this.attackerIndex].name} attacks ${this.observers[this.attackTargetIndex].name}`
+            `${this.observers[this.turnIndex].name} attacks ${this.observers[targetIndex].name}`
         );
 
-        this.observers[this.battleState.attackTargetIndex].receiveAttack(
-            this.battleState
-        );
+        this.observers[targetIndex].receiveAttack(this.battleState);
+        this._turn = (this.turnIndex + 1) % this.observers.length;
     }
 
     public resetNumberOfTurns() {
         this.battleState.numberOfTurns = this.observers.length;
     }
 
-    set _battleState(newBattleState: IBattleState) {
+    public set _battleState(newBattleState: IBattleState) {
         this.battleState = newBattleState;
         this.notifyObservers();
     }
 
-    set _attacker(attackerIndex: number) {
-        this.battleState.attackerIndex = attackerIndex;
-        this.notifyObservers();
+    public set _turn(turnIndex: number) {
+        this.battleState.characterTurnIndex = turnIndex;
     }
 
-    set _attackerTarget(attackTargetIndex: number) {
-        this.battleState.attackTargetIndex = attackTargetIndex;
-        this.notifyObservers();
-    }
-
-    get attackerIndex(): number {
-        return this.battleState.attackerIndex;
-    }
-
-    get attackTargetIndex(): number {
-        return this.battleState.attackTargetIndex;
+    public get turnIndex(): number {
+        return this.battleState.characterTurnIndex;
     }
 }
