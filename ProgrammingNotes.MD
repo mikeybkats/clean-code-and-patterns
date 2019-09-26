@@ -2,9 +2,17 @@
 
 _a gathering of notes from multiple code teachings_
 
-## from Head first design patterns a brain friendly guide:
+## From Head first design patterns a brain friendly guide:
 
-## OO Basics
+## Object Oriented Patterns:
+
+**_The Strategy Pattern_** - defines a family of algorithms, encapsulate each one, and makes them interchangeable. Strategy lets the algorithm vary independently, from the clients that use it.
+
+**_The Observer Pattern_** - A pattern for communicating state to a set of objects in a loosely coupled manner. Think of a newspaper publisher business with subscribers. There is a publisher or SUBJECT which which broadcasts or sends data and there is an OBSERVER that consumes or subscribes to the changes.
+
+_*"The Observer pattern defines a one-to-many dependency betwen objects so that when one object changes state all of its dependents are notified and updated automatically - Location 1081"*_
+
+## chapter 1 - OO Basics
 
 **_Abstraction_**  
 This concept tells the developer to distill away the most basic form of an object. Many kinds of ducks could be expressed by one main duck class.
@@ -22,7 +30,7 @@ class Mallard extends Duck {
 ```
 
 **_Encapsulation_**  
-Encapsulation is pretty simple. It's a strategy where you take the data that changes and put it in an isolated place.
+Encapsulation is pretty simple. It's a strategy where you take the data that changes and put it in an isolated place. "Take what varies in a system and encapsulate it"
 
 _"Take what varies and encapsulate it so it won't effect the rest of your code" Location 554_
 
@@ -48,7 +56,7 @@ All three classes have a fly() function. All three have different implementation
 **_Inheritance_**  
 Similar to abstraction. Subclasses inherit the methods of the base class.
 
-## OO Principles:
+## chapter 1 - OO Principles:
 
 **_Encapsulate what varies_**
 
@@ -56,6 +64,6 @@ Similar to abstraction. Subclasses inherit the methods of the base class.
 
 **_Program to interfaces, not implementations_**
 
-## OO Patterns:
+## chapter 2 - OO Principles:
 
-**_The Strategy Pattern - defines a family of algorithms, encapsulate each one, and makes them interchangeable. Strategy lets the algorithm vary independently, from the clients that use it._**
+**_Strive for loosely coupled designs between objects that interact_**
