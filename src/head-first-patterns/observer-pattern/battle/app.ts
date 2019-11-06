@@ -37,10 +37,20 @@ const slime4 = new Slime({
     battle,
     params: {
         name: "Terminator Slime",
-        hitPointsBase: 100,
-        hitPointsCurrent: 100,
+        hitPointsBase: 10,
+        hitPointsCurrent: 10,
         defense: 0,
-        attackPower: 10,
+        attackPower: 6,
+    },
+});
+const slime5 = new Slime({
+    battle,
+    params: {
+        name: "Friendly Slime",
+        hitPointsBase: 5,
+        hitPointsCurrent: 5,
+        defense: 0,
+        attackPower: 1,
     },
 });
 
