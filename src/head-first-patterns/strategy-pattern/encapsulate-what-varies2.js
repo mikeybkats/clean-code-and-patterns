@@ -1,3 +1,13 @@
+/*
+ *
+ * THE STRATEGY PATTERN:
+ * defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+ * Strategy lets the algorithm vary independently from clients that use it.
+ *
+ * Favors composition over inheritance, even though we use the class structure.
+ * This pattern favors many classes to decouple the structure
+ *
+ */
 class Bot {
     PerformReadContent() {
         this._ReadContent.read();

@@ -85,12 +85,11 @@ export class Enemy implements IObserver, ICharacter {
             return characterState.CONSCIOUS;
         }
         if (hitPoints < 0) {
-            if (hitPoints <= -10) {
+            if (hitPoints <= -5) {
                 console.log(`${this.name} has been killed.`);
                 return characterState.DEAD;
             }
             console.log(`${this.name} has been knocked unconscious.`);
-            //console.log(this.battle.observers);
             return characterState.UNCONSCIOUS;
         }
     }

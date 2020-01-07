@@ -4,6 +4,8 @@ interface Subject {
     notifyObservers: () => void;
 }
 
+// the different kinds and number of observers can vary.
+// every new display element is a new observer
 interface Observer {
     update: (weatherState: IWeatherState) => void;
 }
@@ -12,6 +14,7 @@ interface DisplayElement {
     display: () => void;
 }
 
+// application state varies
 interface IWeatherState {
     temperature: number;
     humidity: number;
