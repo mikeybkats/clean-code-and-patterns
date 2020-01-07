@@ -12,6 +12,10 @@ _a gathering of notes from multiple code teachings_
 
 _*"The Observer pattern defines a one-to-many dependency betwen objects so that when one object changes state all of its dependents are notified and updated automatically - Location 1081"*_
 
+**_The Decorator Pattern_**
+
+_*"The Decorator Pattern attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality."*_
+
 ## chapter 1 - OO Basics
 
 **_Abstraction_**  
@@ -67,3 +71,13 @@ Similar to abstraction. Subclasses inherit the methods of the base class.
 ## chapter 2 - OO Principles:
 
 **_Strive for loosely coupled designs between objects that interact_**
+
+## chapter 3 - OO Principles:
+
+The open closed principle:
+
+**_Code should be closed to change, but open to extension._**  
+in other words:  
+**_Code should be open for extension, but closed for modification._**
+
+Concentrate on the areas of your code that are most likely to change and apple the principles there.

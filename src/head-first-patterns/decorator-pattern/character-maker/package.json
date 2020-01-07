@@ -1,0 +1,17 @@
+{
+    "name": "character-maker",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "gulp": "4",
+        "gulp-typescript": "^6.0.0-alpha.1",
+        "typescript": "^3.7.3"
+    },
+    "scripts": {
+        "start": "gulp start"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
