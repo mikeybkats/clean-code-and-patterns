@@ -16,6 +16,10 @@ _*"The Observer pattern defines a one-to-many dependency betwen objects so that 
 
 _*"The Decorator Pattern attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality."*_
 
+**_The Factory Pattern_**
+
+_*"The Factory Method Pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses."*_
+
 ## chapter 1 - OO Basics
 
 **_Abstraction_**  
@@ -60,7 +64,9 @@ All three classes have a fly() function. All three have different implementation
 **_Inheritance_**  
 Similar to abstraction. Subclasses inherit the methods of the base class.
 
-## chapter 1 - OO Principles:
+## chapter 1 - the strategy pattern
+
+OO Principles:
 
 **_Encapsulate what varies_**
 
@@ -68,11 +74,15 @@ Similar to abstraction. Subclasses inherit the methods of the base class.
 
 **_Program to interfaces, not implementations_**
 
-## chapter 2 - OO Principles:
+## chapter 2 - the observer pattern
+
+OO Principles:
 
 **_Strive for loosely coupled designs between objects that interact_**
 
-## chapter 3 - OO Principles:
+## chapter 3 - the decorator pattern
+
+OO Principles:
 
 The open closed principle:
 
@@ -81,3 +91,18 @@ in other words:
 **_Code should be open for extension, but closed for modification._**
 
 Concentrate on the areas of your code that are most likely to change and apple the principles there.
+
+## chapter 4 - the factory pattern
+
+OO Principles:
+
+Dependency inversion principle:
+Depend upon abstractions, don't depend on concrete classes. In other words - high level components should not depend on low level components. The should both depend on abstractions.
+
+guidelines:
+
+-   no variable should hold reference to a concrete class
+-   no class should derive from a concrete class
+-   no method should override an imlpemented method of any of its base classes
+
+remember these are guidelines, it's okay to violate some but not all. Avoid violating when you can.
