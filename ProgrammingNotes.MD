@@ -106,3 +106,7 @@ guidelines:
 -   no method should override an imlpemented method of any of its base classes
 
 remember these are guidelines, it's okay to violate some but not all. Avoid violating when you can.
+
+**_The Factory Method Pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses._**
+
+**_The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes._**
