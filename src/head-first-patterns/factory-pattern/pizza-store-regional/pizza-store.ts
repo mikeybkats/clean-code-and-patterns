@@ -14,9 +14,12 @@ abstract class PizzaStore {
     }
 }
 
+// this is the product factory it makes pizzas (product)
+// NYCPizzaStore is a client of the abstract factory
 export class NYCPizzaStore extends PizzaStore {
     createPizza(type: string): Pizza {
         let pizza = null;
+        // each specific factory has it's own specific ingredient factory
         const ingredientFactory = new Ingredients.NYCPizzaIngredientFactory();
 
         if (type === "cheese") {

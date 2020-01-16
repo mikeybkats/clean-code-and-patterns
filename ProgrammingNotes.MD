@@ -110,3 +110,5 @@ remember these are guidelines, it's okay to violate some but not all. Avoid viol
 **_The Factory Method Pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses._**
 
 **_The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes._**
+
+The big difference between the Factory Method and the Abstract Factory is that the Factory Method Pattern creates objects through inheritance while the Abstract Factory creates objects through interfaces.
