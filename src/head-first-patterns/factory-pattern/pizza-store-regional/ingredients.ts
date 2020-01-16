@@ -7,12 +7,50 @@ interface IPizzaIngredientFactory {
     createClams: () => Clams;
 }
 
+// notice how we use inheritance here to extend some of the ingredients. this is a pattern of the
+// factory pattern.
 export class Dough {}
 export class NYCThinCrustDough extends Dough {}
 export class ChicagoDeepDish extends Dough {}
 export class CaliforniaSourDough extends Dough {}
 
-export class Sauce {}
+// the abstract factory pattern would use interfaces to extend these ingredients. let's do this with sauce:
+// these functions are just returning empty objects, but ideally each one would have its own interface;
+
+interface IPizzaSauce {
+    sweetness: string;
+    saltyness: string;
+    sourness: string;
+    umami: string;
+}
+
+export class Sauce {
+    sauce;
+
+    constructor(typeOfSauce: string) {
+        if (typeOfSauce === "NYCMarinaraSauce") {
+            this.sauce = this.NYCMarinaraSauce();
+        }
+    }
+
+    public NYCMarinaraSauce(): IPizzaSauce {
+        return {
+            sweetness: "mild",
+            saltyness: "mild",
+            sourness: "mild",
+            umami: "mild",
+        };
+    }
+
+    public ChicagoSauce(): {} {
+        return {};
+    }
+
+    public CaliforniaSauce(): {} {
+        return {};
+    }
+}
+
 export class NYCMarinaraSauce extends Sauce {}
 export class ChicagoSauce extends Sauce {}
 export class CaliforniaSauce extends Sauce {}
@@ -48,7 +86,7 @@ export class PizzaIngredientFactory implements IPizzaIngredientFactory {
     }
 
     public createSauce(): Sauce {
-        return new Sauce();
+        return new Sauce("");
     }
 
     public createCheese(): Cheese {
@@ -84,7 +122,7 @@ export class NYCPizzaIngredientFactory implements IPizzaIngredientFactory {
     }
 
     public createSauce(): Sauce {
-        return new NYCMarinaraSauce();
+        return new NYCMarinaraSauce("NYCMarinaraSauce");
     }
 
     public createCheese(): Cheese {
