@@ -4,6 +4,7 @@
         "module": "commonjs",
         "jsx": "react",
         "sourceMap": true,
-        "types": []
+        "types": [],
+        "outDir": "./dist"
     }
 }

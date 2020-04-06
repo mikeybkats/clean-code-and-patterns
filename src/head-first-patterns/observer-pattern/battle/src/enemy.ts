@@ -1,12 +1,6 @@
-import { ICharacter } from "./enemy.props";
+import { ICharacter, characterState } from "./character.props";
 import { IObserver, IBattleScenario } from "./battle.props";
 import { IBattleState } from "./battle";
-
-export enum characterState {
-    CONSCIOUS = "conscious",
-    UNCONSCIOUS = "unconscious",
-    DEAD = "dead",
-}
 
 interface IEnemyProps {
     battle: IBattleScenario;

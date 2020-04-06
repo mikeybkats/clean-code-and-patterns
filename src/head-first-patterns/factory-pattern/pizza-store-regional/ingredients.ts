@@ -17,28 +17,43 @@ export class CaliforniaSourDough extends Dough {}
 // the abstract factory pattern would use interfaces to extend these ingredients. let's do this with sauce:
 // these functions are just returning empty objects, but ideally each one would have its own interface;
 
-interface IPizzaSauce {
+interface ISauceProfile {
     sweetness: string;
     saltyness: string;
     sourness: string;
     umami: string;
+    thickness: string;
 }
 
 export class Sauce {
-    sauce;
+    sauceProfile: ISauceProfile;
 
     constructor(typeOfSauce: string) {
+        if (typeOfSauce === "") {
+            this.sauceProfile = {
+                sweetness: "default",
+                saltyness: "default",
+                sourness: "default",
+                umami: "default",
+                thickness: "thin",
+            };
+        }
         if (typeOfSauce === "NYCMarinaraSauce") {
-            this.sauce = this.NYCMarinaraSauce();
+            this.sauceProfile = this.NYCMarinaraSauce();
+        }
+        if (typeOfSauce === "ChicagoSauce") {
+        }
+        if (typeOfSauce === "CaliforniaSauce") {
         }
     }
 
-    public NYCMarinaraSauce(): IPizzaSauce {
+    public NYCMarinaraSauce(): ISauceProfile {
         return {
             sweetness: "mild",
             saltyness: "mild",
             sourness: "mild",
             umami: "mild",
+            thickness: "thin",
         };
     }
 

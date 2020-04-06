@@ -1,9 +1,9 @@
-import { Battle, BattleController } from "./battle";
-import { Slime } from "./enemy";
-import { ICharacter } from "./enemy.props";
-
-const battle = new Battle();
-const slime = new Slime({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const battle_1 = require("../src/battle");
+const enemy_1 = require("../src/enemy");
+const battle = new battle_1.Battle();
+const slime = new enemy_1.Slime({
     battle,
     params: {
         name: "Little Slime",
@@ -13,7 +13,7 @@ const slime = new Slime({
         attackPower: 1,
     },
 });
-const slime2 = new Slime({
+const slime2 = new enemy_1.Slime({
     battle,
     params: {
         name: "Big Slime",
@@ -23,7 +23,7 @@ const slime2 = new Slime({
         attackPower: 5,
     },
 });
-const slime3 = new Slime({
+const slime3 = new enemy_1.Slime({
     battle,
     params: {
         name: "Mega Slime",
@@ -33,7 +33,7 @@ const slime3 = new Slime({
         attackPower: 10,
     },
 });
-const slime4 = new Slime({
+const slime4 = new enemy_1.Slime({
     battle,
     params: {
         name: "Terminator Slime",
@@ -43,7 +43,7 @@ const slime4 = new Slime({
         attackPower: 6,
     },
 });
-const slime5 = new Slime({
+const slime5 = new enemy_1.Slime({
     battle,
     params: {
         name: "Friendly Slime",
@@ -53,6 +53,6 @@ const slime5 = new Slime({
         attackPower: 1,
     },
 });
-
-const controller = new BattleController(battle);
+const controller = new battle_1.BattleController(battle);
 controller.run();
+//# sourceMappingURL=app.js.map

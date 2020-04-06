@@ -1,6 +1,11 @@
 import { IObserver } from "./battle.props";
-import { characterState } from "./enemy";
 import { IBattleState } from "./battle";
+
+export enum characterState {
+    CONSCIOUS = "conscious",
+    UNCONSCIOUS = "unconscious",
+    DEAD = "dead",
+}
 
 export interface ICharacter extends IObserver {
     attackPower: number;

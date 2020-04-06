@@ -1,5 +1,5 @@
 import { IBattleState } from "./battle";
-import { ICharacter } from "./enemy.props";
+import { ICharacter } from "./character.props";
 
 export interface IBattleScenario {
     registerObserver: (observer: IObserver) => void;

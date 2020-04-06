@@ -1,5 +1,5 @@
 import { IBattleScenario, IObserver } from "./battle.props";
-import { ICharacter } from "./enemy.props";
+import { ICharacter } from "./character.props";
 
 export interface IBattleState {
     numberOfTurns: number;
@@ -30,14 +30,23 @@ export class BattleController {
         // until only one observer is left
         while (this.battle.observers.length > 1) {
             console.log(
-                `${this.battle.observers[this.battle.turnIndex].name}'s turn! HP: ${this.battle.observers[this.battle.turnIndex].hitPointsCurrent}\/${this.battle.observers[this.battle.turnIndex].hitPointsBase}`
+                `${
+                    this.battle.observers[this.battle.turnIndex].name
+                }'s turn! HP: ${
+                    this.battle.observers[this.battle.turnIndex]
+                        .hitPointsCurrent
+                }\/${
+                    this.battle.observers[this.battle.turnIndex].hitPointsBase
+                }`
             );
             this.battle.attack(this.chooseRandomPlayer(this.battle.observers));
         }
 
         if (this.battle.observers.length === 1) {
             console.log(
-                `${this.battle.observers[this.battle.turnIndex].name} has won the battle!`
+                `${
+                    this.battle.observers[this.battle.turnIndex].name
+                } has won the battle!`
             );
             return 0;
         }
@@ -92,7 +101,9 @@ export class Battle implements IBattleScenario {
 
     public attack(targetIndex: number) {
         console.log(
-            `${this.observers[this.turnIndex].name} attacks ${this.observers[targetIndex].name}`
+            `${this.observers[this.turnIndex].name} attacks ${
+                this.observers[targetIndex].name
+            }`
         );
 
         this.observers[targetIndex].receiveAttack(this.battleState);
