@@ -21,17 +21,13 @@ class RemoteLoader {
         const livingRoomStereo: Stereo = new Stereo("Living room stereo");
 
         // add light commands
-        const livingRoomLightOn: LightOnCommand = new LightOnCommand(
+        const livingRoomLightOn: ICommand = new LightOnCommand(livingRoomLight);
+        const livingRoomLightOff: ICommand = new LightOffCommand(
             livingRoomLight
         );
-        const livingRoomLightOff: LightOffCommand = new LightOffCommand(
-            livingRoomLight
-        );
+        const kitchenLightOn: ICommand = new LightOnCommand(kitchenLight);
+        const kitchenLightOff: ICommand = new LightOffCommand(kitchenLight);
 
-        const kitchenLightOn: LightOnCommand = new LightOnCommand(kitchenLight);
-        const kitchenLightOff: LightOffCommand = new LightOffCommand(
-            kitchenLight
-        );
         // add garage door commands
         const garageDoorOpenLeft: ICommand = new GarageDoorOpenCommand(
             garageDoorLeft
@@ -47,10 +43,8 @@ class RemoteLoader {
         );
 
         // add stereo commands
-        const stereoOn: StereoOnWithDac = new StereoOnWithDac(livingRoomStereo);
-        const stereoOff: StereoOffWithDac = new StereoOffWithDac(
-            livingRoomStereo
-        );
+        const stereoOn: ICommand = new StereoOnWithDac(livingRoomStereo);
+        const stereoOff: ICommand = new StereoOffWithDac(livingRoomStereo);
 
         // set commands
         remoteControl.setCommand({

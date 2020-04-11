@@ -13,8 +13,20 @@ export class EmptyCommand implements ICommand {
     }
 }
 
+interface ISetCommandArgs {
+    onCommand: ICommand;
+    offCommand: ICommand;
+    slot: number;
+}
+
+interface IRemoteControl {
+    onCommands: ICommand[];
+    offCommands: ICommand[];
+    setCommand: (args: ISetCommandArgs) => void;
+}
+
 // invoker
-export class RemoteControlMulti {
+export class RemoteControlMulti implements IRemoteControl {
     onCommands: ICommand[];
     offCommands: ICommand[];
 
@@ -30,11 +42,7 @@ export class RemoteControlMulti {
         }
     }
 
-    public setCommand(commandArgs: {
-        onCommand: ICommand;
-        offCommand: ICommand;
-        slot: number;
-    }): void {
+    public setCommand(commandArgs: ISetCommandArgs): void {
         this.onCommands[commandArgs.slot] = commandArgs.onCommand;
         this.offCommands[commandArgs.slot] = commandArgs.offCommand;
     }

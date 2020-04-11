@@ -124,3 +124,12 @@ remember these are guidelines, it's okay to violate some but not all. Avoid viol
 ## Chapter 5 - The Singleton Pattern
 
 The singleton pattern insures that your class produces only one unique instance of itself.
+
+## Chapter 6 - The Command Pattern
+
+The command pattern encapsulates method invocation. All command objects implement the same interface.
+
+Def from clean code:
+The command pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable opperations. This is an example of parameterizing an object with a command.
+
+The command pattern is helpful for implementing logging and undo.
