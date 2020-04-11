@@ -1,9 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class EmptyCommand {
-    execute() { }
-    undo() { }
+    constructor() {
+        this.name = "Empty command slot";
+    }
+    execute() {
+        console.log("No exectution");
+    }
+    undo() {
+        console.log("No undo");
+    }
 }
+exports.EmptyCommand = EmptyCommand;
 // invoker
 class RemoteControlMulti {
     constructor() {
@@ -14,16 +22,21 @@ class RemoteControlMulti {
             this.offCommands[i] = emptyCommand;
             this.onCommands[i] = emptyCommand;
         }
-        // this doesn't work because...
-        // for each does not iterate over sparse arrays
-        // new Array(7).forEach((command, index) => {
-        //     console.log("i'm running");
-        //     // this.onCommands[index] = emptyCommand;
-        // });
     }
-    setOnCommand(command, index) {
-        this.onCommands[index] = command;
+    setCommand(commandArgs) {
+        this.onCommands[commandArgs.slot] = commandArgs.onCommand;
+        this.offCommands[commandArgs.slot] = commandArgs.offCommand;
+    }
+    onButtonWasPressed(slot) {
+        this.onCommands[slot].execute();
+    }
+    offButtonWasPressed(slot) {
+        this.offCommands[slot].execute();
+    }
+    getSlots() {
+        return this.onCommands.map((command, index) => {
+            return `slot ${index} --- on: ${this.onCommands[index].name} --- off: ${this.offCommands[index].name}`;
+        });
     }
 }
 exports.RemoteControlMulti = RemoteControlMulti;
-console.log(new RemoteControlMulti());

@@ -1,9 +1,6 @@
 {
+    "extends": "../../../tsconfig.base.json",
     "compilerOptions": {
-        "target": "ES6",
-        "module": "commonjs",
-        "jsx": "react",
-        "types": [],
         "outDir": "dist"
     }
 }

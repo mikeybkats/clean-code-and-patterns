@@ -1,9 +1,16 @@
 import { ICommand } from "./command.props";
 
-class EmptyCommand implements ICommand {
+export class EmptyCommand implements ICommand {
     name: string;
-    public execute() {}
-    public undo() {}
+    constructor() {
+        this.name = "Empty command slot";
+    }
+    public execute(): void {
+        console.log("No exectution");
+    }
+    public undo(): void {
+        console.log("No undo");
+    }
 }
 
 // invoker
@@ -23,13 +30,13 @@ export class RemoteControlMulti {
         }
     }
 
-    public setOnCommand(
-        onCommand: ICommand,
-        offCommand: ICommand,
-        slot: number
-    ): void {
-        this.onCommands[slot] = onCommand;
-        this.offCommands[slot] = offCommand;
+    public setCommand(commandArgs: {
+        onCommand: ICommand;
+        offCommand: ICommand;
+        slot: number;
+    }): void {
+        this.onCommands[commandArgs.slot] = commandArgs.onCommand;
+        this.offCommands[commandArgs.slot] = commandArgs.offCommand;
     }
 
     public onButtonWasPressed(slot: number): void {
@@ -40,11 +47,9 @@ export class RemoteControlMulti {
         this.offCommands[slot].execute();
     }
 
-    public printSlots(): string[] {
+    public getSlots(): string[] {
         return this.onCommands.map((command, index) => {
-            return `slot ${index} --- on: ${this.onCommands[index].name} --- off: ${this.offCommands[index].name}\n`;
+            return `slot ${index} --- on: ${this.onCommands[index].name} --- off: ${this.offCommands[index].name}`;
         });
     }
 }
-
-console.log(new RemoteControlMulti());

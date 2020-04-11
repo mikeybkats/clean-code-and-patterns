@@ -1,6 +1,12 @@
 import { ICommand } from "./command.props";
 
 export class Light {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
     public on(): void {
         console.log("the light is on!");
     }
@@ -15,12 +21,15 @@ export class LightOnCommand implements ICommand {
 
     public constructor(light: Light) {
         this.light = light;
+        this.name = light.name;
     }
 
     public execute(): void {
         this.light.on();
     }
-    public undo(): void {}
+    public undo(): void {
+        this.light.off();
+    }
 }
 
 export class LightOffCommand implements ICommand {
@@ -29,10 +38,13 @@ export class LightOffCommand implements ICommand {
 
     public constructor(light: Light) {
         this.light = light;
+        this.name = light.name;
     }
 
     public execute(): void {
         this.light.off();
     }
-    public undo(): void {}
+    public undo(): void {
+        this.light.on();
+    }
 }

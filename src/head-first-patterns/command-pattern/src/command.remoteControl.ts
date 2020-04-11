@@ -21,12 +21,12 @@ class RemoteControlTest {
     public static main(args?: String[]) {
         const remote: RemoteControl = new RemoteControl();
 
-        const myLight: Light = new Light();
+        const myLight: Light = new Light("my light");
         const myLightOnCommand: LightOnCommand = new LightOnCommand(myLight);
         remote.setCommand(myLightOnCommand);
         remote.buttonWasPressed();
 
-        const myGarageDoor: GarageDoor = new GarageDoor();
+        const myGarageDoor: GarageDoor = new GarageDoor("my garage door");
         const myGarageDoorCommand = new GarageDoorOpenCommand(myGarageDoor);
         remote.setCommand(myGarageDoorCommand);
         remote.buttonWasPressed();
