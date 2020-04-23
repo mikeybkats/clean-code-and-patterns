@@ -74,6 +74,8 @@ OO Principles:
 
 **_Program to interfaces, not implementations_**
 
+**_Principle of least knowledge: talk only to your immediate friends._**
+
 ## chapter 2 - the observer pattern
 
 OO Principles:
@@ -133,3 +135,27 @@ Def from clean code:
 The command pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable opperations. This is an example of parameterizing an object with a command.
 
 The command pattern is helpful for implementing logging and undo.
+
+There are a few players in this pattern:
+
+-   command object manager - highest in the command pattern food chain. acts like a remote and tells its commands to "execute their action / do their thing". An example of a command object manager is a remote control. Each remote control button has a slot. Each button when pressed fires a command.
+-   the commands - have one primary function: to _execute_ a method on a command object. The command is specific to a single method on a command object. Example: A light is controled by two command object classes LightOnCommand and LightOffCommand. Each command shares the same interface.
+-   the command objects - is an object which has a limited number of tasks or modes. The objects modes/tasks are accessed by the commands. Following the example a Light class would have two methods on and off.
+
+The command pattern relies on many many small classes. These small classes are command implementations. Each implementation encapsulates a request to the reciever.
+
+## Chapter 7 - The adapter and facade patterns
+
+The decorator pattern: wraps objects to give them new responsibilities. This pattern wraps interfaces to make them into something new.
+
+How does an adapter work?
+
+-   the client makes a request to the adapter by calling the method on it that matches the target interface.
+-   the adapter translates the request into one or more calls on the adaptee using the adaptee interface.
+-   the client recieves the call and never knows the difference.
+
+The adapter pattern converts the interface of a class into another interface the client expects. It lets classes work together that couldn't otherwise because of incompatible interfaces.
+
+There are two kinds of adapters: object adapters and class adapters.
+
+Facade pattern: takes a complex subsystem and makes it easier to use by implementing a class that provides one reasonable interface. It allows you to decouple your client implementation from any one subsystem.
