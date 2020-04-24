@@ -8,9 +8,9 @@ abstract class CaffeineBeverageWithHook {
         this.pourInCup();
         const condiments = await this.customerWantsCondiments();
         if (condiments) {
-            console.log(condiments);
             this.addCondiments();
         }
+        this.handBeverage();
     }
 
     abstract brew(): void;
@@ -28,6 +28,10 @@ abstract class CaffeineBeverageWithHook {
         console.log("Does customer want condiments?");
         return false;
     }
+
+    public handBeverage(): void {
+        console.log("Thank you. Please take your beverage.");
+    }
 }
 
 class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
@@ -40,11 +44,17 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
     }
 
     public addCondiments(): void {
-        console.log("Adding special coffee condiments");
+        console.log("Adding special coffee condiments to coffee drink.");
     }
 
     public async customerWantsCondiments(): Promise<boolean> {
-        return await this.getCustomerInput();
+        const input = await this.getCustomerInput().catch((reason: boolean) => {
+            console.log(
+                "They don't want the special drink. Here is the regular coffee drink."
+            );
+            return reason;
+        });
+        return input;
     }
 
     private async getCustomerInput(): Promise<boolean> {
@@ -55,9 +65,12 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
 
         return new Promise((resolve, reject) => {
             rl.question(
-                "Would you like a special coffee drink?",
+                "Would you like a special coffee drink? ",
                 (answer: string) => {
-                    if (answer[0] === "y") {
+                    if (
+                        answer.toLowerCase().includes("yes") ||
+                        answer.toLowerCase().includes("y")
+                    ) {
                         resolve(true);
                     } else reject(false);
                     rl.close();
