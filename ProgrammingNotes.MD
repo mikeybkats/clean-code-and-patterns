@@ -158,4 +158,13 @@ The adapter pattern converts the interface of a class into another interface the
 
 There are two kinds of adapters: object adapters and class adapters.
 
-Facade pattern: takes a complex subsystem and makes it easier to use by implementing a class that provides one reasonable interface. It allows you to decouple your client implementation from any one subsystem.
+Facade pattern: takes a complex subsystem and makes it easier to use by implementing a class that provides one reasonable interface. It allows you to decouple your client implementation from any one subsystem. It provides a unified interface to a set of interfaces in a subsystem.
+
+new principle: the principle of least knowledge
+reduces the number of dependencies between objects. it reduces software maintenance and results in more wrapper classes being written. This results in increased application complexity and descreased runtime performance.
+
+## Chapter 8 - Template Method Pattern.
+
+The template method pattern defines a skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the alrgorithms structure.
+
+A template is just a method that defines a set of steps. One or more of the steps is defined as abstract so that sub classes can shape the behavior of that step independantly.

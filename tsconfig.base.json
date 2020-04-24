@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
+        "lib": ["ESNext"],
+        "target": "es6",
         "module": "CommonJS",
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "types": ["node"],
+        "typeRoots": ["node_modules/@types/"]
     }
 }
