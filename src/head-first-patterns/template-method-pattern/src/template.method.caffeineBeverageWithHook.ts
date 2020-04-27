@@ -14,6 +14,7 @@ abstract class CaffeineBeverageWithHook {
         } else {
             this.rejectCondments();
         }
+        this.handBeverage();
     }
 
     abstract brew(): void;
@@ -32,6 +33,11 @@ abstract class CaffeineBeverageWithHook {
         console.log("Does customer want condiments?");
         return false;
     }
+
+    public handBeverage(): void {
+        console.log("Thank you. Please take your beverage.");
+        process.exit();
+    }
 }
 
 class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
@@ -44,7 +50,7 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
     }
 
     public addCondiments(): void {
-        console.log("Adding special coffee condiments");
+        console.log("Adding special coffee condiments to coffee drink.");
     }
 
     public rejectCondments(): void {
@@ -57,24 +63,23 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
     }
 
     private async askQuestion(rl: Interface): Promise<boolean> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             rl.question(
-                "Would you like a special coffee drink?",
+                "Would you like a special coffee drink? (y/n): ",
                 (answer: string) => {
-                    if (answer[0] && answer[0].toLowerCase() === "y") {
+                    if (answer && answer[0].toLowerCase() === "y") {
                         resolve(true);
                         rl.close();
+                        return false;
                     }
-                    if (answer[0] && answer[0].toLowerCase() === "n") {
+                    if (answer && answer[0].toLowerCase() === "n") {
                         resolve(false);
                         rl.close();
+                        return false;
+                    } else {
+                        resolve(this.askQuestion(rl));
+                        return false;
                     }
-                    if (answer.length === 0) {
-                        this.askQuestion(rl);
-                    } else
-                        reject(
-                            new Error("It seems a strange error has occured.")
-                        );
                 }
             );
         });
@@ -86,8 +91,8 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
             output: process.stdout,
         });
 
-        return this.askQuestion(rl).catch((rejection) => {
-            console.log(rejection);
+        return this.askQuestion(rl).catch((error) => {
+            console.log(new Error(error));
             return false;
         });
     }
