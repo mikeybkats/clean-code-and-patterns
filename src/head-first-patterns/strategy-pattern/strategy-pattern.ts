@@ -8,7 +8,7 @@
  *
  */
 
-interface IQuackBehavior {
+interface IQuackBehavior1 {
     quack?: string;
     makeQuack: () => void;
 }
@@ -17,30 +17,30 @@ interface IFlyBehavior {
     fly: () => void;
 }
 
-class Quack<IQuackBehavior> {
+class Quack implements IQuackBehavior1 {
     quack: string;
 
     constructor(quack: string) {
         this.quack = quack || "Quack";
     }
 
-    public makeQuack = () => console.log(this.quack);
+    public makeQuack = (): void => console.log(this.quack);
 }
 
 class FlyWithWings implements IFlyBehavior {
-    public fly = () => console.log("the duck takes off!\n");
+    public fly = (): void => console.log("the duck takes off!\n");
 }
 
 class CanNotFly implements IFlyBehavior {
-    public fly = () => console.log("This duck cannot fly.\n");
+    public fly = (): void => console.log("This duck cannot fly.\n");
 }
 
 class FlyRocketPowered implements IFlyBehavior {
-    public fly = () => console.log("I'm a rocket duck and I'm flying");
+    public fly = (): void => console.log("I'm a rocket duck and I'm flying");
 }
 
 class Duck {
-    quackBehavior!: IQuackBehavior;
+    quackBehavior!: IQuackBehavior1;
     flyBehavior!: IFlyBehavior;
 
     public performQuack(): void {
@@ -55,7 +55,7 @@ class Duck {
         this.flyBehavior = flyBehavior;
     }
 
-    public setQuackBehavior(quackBehavior: IQuackBehavior): void {
+    public setQuackBehavior(quackBehavior: IQuackBehavior1): void {
         this.quackBehavior = quackBehavior;
     }
 }
@@ -95,7 +95,7 @@ class ModelDuck extends Duck {
     flyBehavior = new CanNotFly();
     quackBehavior = new Quack("Yeah dawg.");
 
-    public display() {
+    public display(): void {
         console.log("I'm a model duck.'");
     }
     public goFlying = (): void => {

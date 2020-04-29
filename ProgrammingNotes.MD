@@ -1,3 +1,11 @@
+# SOLID Principles
+
+SRP: Single Responsibility Principle -  
+OCP: Open closed principle - objects are extendable, but not editable
+LSP: Liskov Substitution Principle - derived classes must be usable through the base class interface, without the need for the user to know the difference.
+ISP: Interface Segregation Principle
+DIP: Dependency inversion principle - high level policies do not know about low level details
+
 # Clean Code and Patterns
 
 _a gathering of notes from multiple code teachings_
@@ -168,3 +176,7 @@ reduces the number of dependencies between objects. it reduces software maintena
 The template method pattern defines a skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the alrgorithms structure.
 
 A template is just a method that defines a set of steps. One or more of the steps is defined as abstract so that sub classes can shape the behavior of that step independantly.
+
+The hollywood principle: don't call us, we'll call you.
+
+"Dependency Rot" - when high level components depend on lowlevel components that depend on high level components.

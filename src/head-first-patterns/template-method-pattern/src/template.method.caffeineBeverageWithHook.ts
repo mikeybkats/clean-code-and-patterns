@@ -1,7 +1,5 @@
 import { Interface } from "readline";
 import * as readline from "readline";
-// const readline = require("readline");
-// template.method.caffeineBeverageWithHook.ts;
 
 abstract class CaffeineBeverageWithHook {
     async prepareBeverage(): Promise<void> {
@@ -85,6 +83,7 @@ class SpecialCoffeeDrink extends CaffeineBeverageWithHook {
         });
     }
 
+    // TODO: Try writing this so that getCustomerInput is a seperate subclass
     private async getCustomerInput(): Promise<boolean> {
         const rl = readline.createInterface({
             input: process.stdin,
