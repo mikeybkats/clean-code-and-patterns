@@ -1,4 +1,4 @@
-import { IMenuItem } from "./iterator.menuItems.props";
+import { IMenuItem, MenuItem } from "./iterator.menuItems.props";
 
 type FixedLengthMenu = readonly [
     IMenuItem,
@@ -8,20 +8,6 @@ type FixedLengthMenu = readonly [
     IMenuItem,
     IMenuItem
 ];
-
-class MenuItem implements IMenuItem {
-    name: string;
-    description: string;
-    price: number;
-    vegetarian: boolean;
-
-    constructor(props: IMenuItem) {
-        this.name = props.name;
-        this.description = props.description;
-        this.price = props.price;
-        this.vegetarian = props.vegetarian;
-    }
-}
 
 class DinnerMenu {
     menuItems: FixedLengthMenu;
