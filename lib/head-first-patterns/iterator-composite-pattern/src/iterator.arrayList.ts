@@ -1,16 +1,16 @@
-interface IListObject {
+interface IListObject<T> {
     index: number;
-    data: {};
+    data: T;
 }
 
 interface IArrayList<T> {
     size: () => number;
-    get: (index: number) => IListObject;
+    get: (index: number) => IListObject<T>;
     add: (data: T) => void;
 }
 
 class ArrayList<T> implements IArrayList<T> {
-    private list: IListObject[];
+    private list: IListObject<T>[];
 
     constructor() {
         this.list = [];
@@ -28,7 +28,7 @@ class ArrayList<T> implements IArrayList<T> {
         });
     }
 
-    public get(index: number): IListObject {
+    public get(index: number): IListObject<T> {
         return this.list[index];
     }
 

@@ -1,19 +1,11 @@
 import { IMenuItem, MenuItem } from "./iterator.menuItems.props";
-
-export type FixedLengthMenu = readonly [
-    IMenuItem,
-    IMenuItem,
-    IMenuItem,
-    IMenuItem,
-    IMenuItem,
-    IMenuItem
-];
+import { DinnerMenuIterator } from "./iterator.menuIterator";
 
 class DinnerMenu {
-    private menuItems: FixedLengthMenu;
+    private readonly menuItems: IMenuItem[];
 
     constructor() {
-        const blankMenu = Array.from(
+        this.menuItems = Array.from(
             { length: 6 },
             () =>
                 new MenuItem({
@@ -22,8 +14,7 @@ class DinnerMenu {
                     price: null,
                     vegetarian: null,
                 })
-        ) as unknown;
-        this.menuItems = blankMenu as FixedLengthMenu;
+        );
 
         this.replaceItem(
             {
@@ -65,13 +56,19 @@ class DinnerMenu {
     }
 
     public printMenuNames(): void {
-        for (const item of this.menuItems) {
-            console.log(item);
+        const iterator = this.createIterator();
+        while (iterator.hasNext()) {
+            console.log(iterator.current());
+            iterator.next();
         }
     }
 
-    public get _menu(): FixedLengthMenu {
+    public get _menu(): IMenuItem[] {
         return this.menuItems;
+    }
+
+    public createIterator(): DinnerMenuIterator<IMenuItem> {
+        return new DinnerMenuIterator(this.menuItems);
     }
 }
 
