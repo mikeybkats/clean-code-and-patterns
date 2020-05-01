@@ -1,46 +1,36 @@
 import { IMenuItem } from "./iterator.menuItems.props";
+import { ArrayList } from "./iterator.arrayList";
 
 class BreakfastMenu {
-    menuItems: IMenuItem[];
+    private menuItems: ArrayList<IMenuItem>;
 
     constructor() {
-        this.menuItems = new Array<IMenuItem>(9);
+        this.menuItems = new ArrayList<IMenuItem>();
 
-        this.addItems([
-            {
-                name: "Pancakes",
-                description: "Short stack with butter and real maple syrup.",
-                price: 4,
-                vegetarian: true,
-            },
-            {
-                name: "Sausage",
-                description: "Two links of pork breakfast sausage",
-                price: 5,
-                vegetarian: false,
-            },
-        ]);
+        this.menuItems.add({
+            name: "Pancakes",
+            description: "Short stack with butter and real maple syrup.",
+            price: 4,
+            vegetarian: true,
+        });
 
-        console.log(this.menuItems);
+        this.menuItems.add({
+            name: "Sausage",
+            description: "Two links of pork breakfast sausage",
+            price: 5,
+            vegetarian: false,
+        });
     }
 
-    public addItems(items: IMenuItem[]): void {
-        items.forEach((addItem: IMenuItem) => {
-            let menuIndex = 0;
-            while (menuIndex < this.menuItems.length) {
-                if (
-                    !this.menuItems[menuIndex] ||
-                    (this.menuItems[menuIndex] &&
-                        !this.menuItems[menuIndex].name)
-                ) {
-                    this.menuItems[menuIndex] = addItem;
-                    menuIndex = this.menuItems.length;
-                    break;
-                }
-                menuIndex++;
-            }
-        });
+    public printMenuNames(): void {
+        for (let i = 0; i < this.menuItems.size(); i++) {
+            console.log(this.menuItems.get(i).data);
+        }
+    }
+
+    public get _menu(): ArrayList<IMenuItem> {
+        return this.menuItems;
     }
 }
 
-new BreakfastMenu();
+new BreakfastMenu().printMenuNames();

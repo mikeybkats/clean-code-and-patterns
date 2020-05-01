@@ -1,6 +1,6 @@
 import { IMenuItem, MenuItem } from "./iterator.menuItems.props";
 
-type FixedLengthMenu = readonly [
+export type FixedLengthMenu = readonly [
     IMenuItem,
     IMenuItem,
     IMenuItem,
@@ -10,7 +10,7 @@ type FixedLengthMenu = readonly [
 ];
 
 class DinnerMenu {
-    menuItems: FixedLengthMenu;
+    private menuItems: FixedLengthMenu;
 
     constructor() {
         const blankMenu = Array.from(
@@ -65,7 +65,13 @@ class DinnerMenu {
     }
 
     public printMenuNames(): void {
-        this.menuItems.forEach((item) => console.log(item.name));
+        for (const item of this.menuItems) {
+            console.log(item);
+        }
+    }
+
+    public get _menu(): FixedLengthMenu {
+        return this.menuItems;
     }
 }
 
