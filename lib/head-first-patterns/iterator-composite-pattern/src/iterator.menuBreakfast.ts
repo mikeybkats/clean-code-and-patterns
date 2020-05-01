@@ -24,7 +24,7 @@ class BreakfastMenu {
         console.log(this.menuItems);
     }
 
-    addItems(items: IMenuItem[]): void {
+    public addItems(items: IMenuItem[]): void {
         items.forEach((addItem: IMenuItem) => {
             let menuIndex = 0;
             while (menuIndex < this.menuItems.length) {
