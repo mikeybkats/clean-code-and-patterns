@@ -1,6 +1,6 @@
 import { IMenuItem } from "./iterator.menuItems.props";
 import { ArrayList } from "./iterator.arrayList";
-import { BreakfastMenuIterator } from "./iterator.menuIterator";
+import { BreakfastMenuIterator, Iterator } from "./iterator.menuIterator";
 
 class BreakfastMenu {
     private menuItems: ArrayList<IMenuItem>;
@@ -23,19 +23,30 @@ class BreakfastMenu {
         });
     }
 
+    //public oldPrintMenuNames(): void {
+    //for (let i = 0; i < this.menuItems.size(); i++) {
+    //console.log(this.menuItems.get(i).data);
+    //}
+    //}
+
     public printMenuNames(): void {
-        for (let i = 0; i < this.menuItems.size(); i++) {
-            console.log(this.menuItems.get(i).data);
+        const iterator = this.createIterator();
+        while (iterator.hasNext()) {
+            console.log(iterator.current());
+            iterator.next();
         }
+    }
+
+    public createIterator(): Iterator<ArrayList<IMenuItem>> {
+        return new BreakfastMenuIterator(this.menuItems);
     }
 
     public get _menu(): ArrayList<IMenuItem> {
         return this.menuItems;
     }
-
-    public createIterator(): BreakfastMenuIterator<IMenuItem> {
-        return new BreakfastMenuIterator(this.menuItems);
-    }
 }
 
-new BreakfastMenu().printMenuNames();
+export { BreakfastMenu };
+
+//console.log("breakfast menu");
+//new BreakfastMenu().printMenuNames();

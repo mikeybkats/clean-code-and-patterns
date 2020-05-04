@@ -1,5 +1,5 @@
 import { IMenuItem, MenuItem } from "./iterator.menuItems.props";
-import { DinnerMenuIterator } from "./iterator.menuIterator";
+import { DinnerMenuIterator, Iterator } from "./iterator.menuIterator";
 
 class DinnerMenu {
     private readonly menuItems: IMenuItem[];
@@ -58,21 +58,22 @@ class DinnerMenu {
     public printMenuNames(): void {
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
-            console.log(iterator.current());
+            if (iterator.current().name !== null) {
+                console.log(iterator.current());
+            }
             iterator.next();
         }
+    }
+
+    public createIterator(): Iterator<MenuItem[]> {
+        return new DinnerMenuIterator(this.menuItems);
     }
 
     public get _menu(): IMenuItem[] {
         return this.menuItems;
     }
-
-    public createIterator(): DinnerMenuIterator<IMenuItem> {
-        return new DinnerMenuIterator(this.menuItems);
-    }
 }
 
 export { DinnerMenu };
-
-const myMenu = new DinnerMenu();
-myMenu.printMenuNames();
+//console.log("dinner menu");
+//new DinnerMenu().printMenuNames();
