@@ -23,12 +23,6 @@ class BreakfastMenu {
         });
     }
 
-    //public oldPrintMenuNames(): void {
-    //for (let i = 0; i < this.menuItems.size(); i++) {
-    //console.log(this.menuItems.get(i).data);
-    //}
-    //}
-
     public printMenuNames(): void {
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
@@ -47,6 +41,3 @@ class BreakfastMenu {
 }
 
 export { BreakfastMenu };
-
-//console.log("breakfast menu");
-//new BreakfastMenu().printMenuNames();

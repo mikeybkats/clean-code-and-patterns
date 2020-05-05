@@ -5,15 +5,13 @@ class DinnerMenu {
     private readonly menuItems: IMenuItem[];
 
     constructor() {
-        this.menuItems = Array.from(
-            { length: 6 },
-            () =>
-                new MenuItem({
-                    name: null,
-                    description: null,
-                    price: null,
-                    vegetarian: null,
-                })
+        this.menuItems = Array.from({ length: 6 }, () =>
+            new MenuItem({
+                name: null,
+                description: null,
+                price: null,
+                vegetarian: null,
+            }).getItem()
         );
 
         this.replaceItem(
@@ -58,14 +56,14 @@ class DinnerMenu {
     public printMenuNames(): void {
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
-            if (iterator.current().name !== null) {
+            if (iterator.current().value.name !== null) {
                 console.log(iterator.current());
             }
             iterator.next();
         }
     }
 
-    public createIterator(): Iterator<MenuItem[]> {
+    public createIterator(): Iterator<IMenuItem[]> {
         return new DinnerMenuIterator(this.menuItems);
     }
 
@@ -75,5 +73,3 @@ class DinnerMenu {
 }
 
 export { DinnerMenu };
-//console.log("dinner menu");
-//new DinnerMenu().printMenuNames();

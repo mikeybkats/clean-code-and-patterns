@@ -1,10 +1,19 @@
 import { ArrayList } from "./iterator.arrayList";
 import { IMenuItem } from "./iterator.menuItems.props";
 
+// IIteratorNode conforms to javascripts definition of iteration object:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterator_protocol
+
+interface IIteratorNode {
+    done: boolean;
+    value: IMenuItem;
+}
+
 interface IMenuIterator<T> {
     hasNext: () => boolean;
     next: () => IMenuItem;
-    current: () => IMenuItem;
+    current: () => IIteratorNode;
+    remove: () => boolean;
     _index: number;
     _menuItems: T;
 }
@@ -30,8 +39,9 @@ export abstract class Iterator<T> implements IMenuIterator<T> {
     }
 
     abstract next(): IMenuItem;
-    abstract current(): IMenuItem;
+    abstract current(): IIteratorNode;
     abstract hasNext(): boolean;
+    abstract remove(): boolean;
 }
 
 /**
@@ -70,8 +80,20 @@ export class DinnerMenuIterator extends Iterator<IMenuItem[]> {
     /**
      * returns the current node
      */
-    public current(): IMenuItem {
-        return this._menuItems[this._index];
+    public current(): IIteratorNode {
+        const value: IMenuItem = this._menuItems[this._index];
+
+        if (value) {
+            return { done: false, value };
+        } else return { done: true, value: null };
+    }
+
+    /**
+     * removes the node
+     * returns true if succesful
+     */
+    public remove(): boolean {
+        return false;
     }
 }
 
@@ -94,8 +116,11 @@ export class BreakfastMenuIterator extends Iterator<ArrayList<IMenuItem>> {
     /**
      * returns the current node
      */
-    public current(): IMenuItem {
-        return this._menuItems.get(this._index).data;
+    public current(): IIteratorNode {
+        const value: IMenuItem = this._menuItems.get(this._index).data;
+        if (value) {
+            return { value, done: false };
+        } else return { value: null, done: true };
     }
 
     /**
@@ -105,5 +130,9 @@ export class BreakfastMenuIterator extends Iterator<ArrayList<IMenuItem>> {
         if (this._index >= this._menuItems.size()) {
             return false;
         } else return true;
+    }
+
+    public remove(): boolean {
+        return false;
     }
 }

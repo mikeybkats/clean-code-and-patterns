@@ -17,8 +17,8 @@ class MenuServer {
         menuIterator: Iterator<ArrayList<IMenuItem> | IMenuItem[]>
     ): void {
         while (menuIterator.hasNext()) {
-            if (menuIterator.current().name !== null) {
-                console.log(menuIterator.current());
+            if (menuIterator.current().value.name !== null) {
+                console.log(menuIterator.current().value);
             }
             menuIterator.next();
         }
