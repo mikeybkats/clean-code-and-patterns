@@ -180,3 +180,13 @@ A template is just a method that defines a set of steps. One or more of the step
 The hollywood principle: don't call us, we'll call you.
 
 "Dependency Rot" - when high level components depend on lowlevel components that depend on high level components.
+
+## Chapter 9 - The iterator pattern
+
+The iterator pattern provides a way to access elements of an aggregate object (like an array or list) sequentially without exposing its underlying representation.
+
+This is valuable because you may have two classes that both need to iterate several different kinds of data, and you want to iterate through the different data by using only one method.
+
+It places the task of traversal on the iterator not on the aggregate.
+
+Single Responsibility - a class should have only one reason to change.
