@@ -7,6 +7,7 @@ interface IArrayList<T> {
     size: () => number;
     get: (index: number) => IListObject<T>;
     add: (data: T) => void;
+    remove: (data: T) => void;
 }
 
 class ArrayList<T> implements IArrayList<T> {
@@ -26,6 +27,16 @@ class ArrayList<T> implements IArrayList<T> {
             index: length,
             data,
         });
+    }
+
+    public remove(data: T): void {
+        console.log(this.list);
+        this.list.forEach((value: IListObject<T>, index: number) => {
+            if (JSON.stringify(value.data) === JSON.stringify(data)) {
+                this.list.splice(index, 1);
+            }
+        });
+        console.log(this.list);
     }
 
     public get(index: number): IListObject<T> {
