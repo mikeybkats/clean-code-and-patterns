@@ -97,7 +97,7 @@ export class DinnerMenuIterator extends Iterator<IMenuItem[]> {
     }
 }
 
-export class BreakfastMenuIterator extends Iterator<ArrayList<IMenuItem>> {
+export class ArrayListMenuIterator extends Iterator<ArrayList<IMenuItem>> {
     constructor(items: ArrayList<IMenuItem>) {
         super();
         this._menuItems = items;

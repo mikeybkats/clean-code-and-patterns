@@ -1,6 +1,6 @@
 import { IMenuItem } from "./iterator.menuItems.props";
 import { ArrayList } from "./iterator.arrayList";
-import { BreakfastMenuIterator, Iterator } from "./iterator.menuIterator";
+import { ArrayListMenuIterator, Iterator } from "./iterator.menuIterator";
 
 class BreakfastMenu {
     private menuItems: ArrayList<IMenuItem>;
@@ -32,7 +32,7 @@ class BreakfastMenu {
     }
 
     public createIterator(): Iterator<ArrayList<IMenuItem>> {
-        return new BreakfastMenuIterator(this.menuItems);
+        return new ArrayListMenuIterator(this.menuItems);
     }
 
     public get _menu(): ArrayList<IMenuItem> {

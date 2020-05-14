@@ -1,17 +1,19 @@
 import { ArrayList } from "./iterator.arrayList";
+import { IMenuItem } from "./iterator.menuItems.props";
+import { ArrayListComponentIterator, Iterator } from "./composite.iterator";
 
-interface IMenuComponent {
+export interface IMenuComponent {
     _Name: string;
     _Description: string;
-    _Price: number;
-    _Vegetarian: boolean;
-    print: () => void;
+    _Price?: number;
+    _Vegetarian?: boolean;
+    print?: () => void;
     add?: (menu: MenuComponent) => void;
     remove?: (menu: MenuComponent) => void;
     getChild?: (child: number) => void;
 }
 
-abstract class MenuComponent implements IMenuComponent {
+export abstract class MenuComponent implements IMenuComponent {
     public get _Name(): string {
         return "name";
     }
@@ -38,25 +40,18 @@ abstract class MenuComponent implements IMenuComponent {
     }
 }
 
-interface IMenuItemProps {
-    name: string;
-    description: string;
-    price: number;
-    isVegetarian: boolean;
-}
-
-class MenuItem extends MenuComponent {
+export class MenuItem extends MenuComponent {
     private name: string;
     private description: string;
     private price: number;
     private vegetarian: boolean;
 
-    constructor(props: IMenuItemProps) {
+    constructor(props: IMenuItem) {
         super();
         this.name = props.name;
         this.description = props.description;
         this.price = props.price;
-        this.vegetarian = props.isVegetarian;
+        this.vegetarian = props.vegetarian;
     }
 
     public get _Name(): string {
@@ -85,15 +80,20 @@ class MenuItem extends MenuComponent {
     }
 }
 
-class Menu extends MenuComponent {
+export interface IMenuProps {
+    name: string;
+    description: string;
+}
+
+export class Menu extends MenuComponent {
     private menuComponents: ArrayList<MenuComponent>;
     private name: string;
     private description: string;
 
-    constructor(name: string, description: string) {
+    constructor(props: IMenuProps) {
         super();
-        this.name = name;
-        this.description = description;
+        this.name = props.name;
+        this.description = props.description;
     }
 
     public getChild(child: number): MenuComponent {
@@ -102,5 +102,21 @@ class Menu extends MenuComponent {
 
     public remove(menu: MenuComponent): void {
         this.menuComponents.remove(menu);
+    }
+
+    public add(menu: MenuComponent): void {
+        this.menuComponents.add(menu);
+    }
+
+    public print(): void {
+        const iterator = this.createIterator();
+        while (iterator.hasNext()) {
+            console.log(iterator.current());
+            iterator.next();
+        }
+    }
+
+    public createIterator(): Iterator<ArrayList<MenuComponent>, MenuComponent> {
+        return new ArrayListComponentIterator(this.menuComponents);
     }
 }
