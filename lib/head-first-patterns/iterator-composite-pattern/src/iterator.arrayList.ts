@@ -30,13 +30,14 @@ class ArrayList<T> implements IArrayList<T> {
     }
 
     public remove(data: T): void {
-        console.log(this.list);
+        // console.log(this.list);
         this.list.forEach((value: IListObject<T>, index: number) => {
             if (JSON.stringify(value.data) === JSON.stringify(data)) {
+                console.log("removing item", value.data);
                 this.list.splice(index, 1);
             }
         });
-        console.log(this.list);
+        // console.log(this.list);
     }
 
     public get(index: number): IListObject<T> {

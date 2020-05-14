@@ -15,7 +15,7 @@ export interface IMenuComponent {
 
 export abstract class MenuComponent implements IMenuComponent {
     public get _Name(): string {
-        return "name";
+        throw new Error("Name is not defined");
     }
     public get _Description(): string {
         throw new Error("Description not defined.");
@@ -94,6 +94,15 @@ export class Menu extends MenuComponent {
         super();
         this.name = props.name;
         this.description = props.description;
+        this.menuComponents = new ArrayList<MenuComponent>();
+    }
+
+    public get _Name(): string {
+        return this.name;
+    }
+
+    public get _Description(): string {
+        return this.description;
     }
 
     public getChild(child: number): MenuComponent {
@@ -111,7 +120,7 @@ export class Menu extends MenuComponent {
     public print(): void {
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
-            console.log(iterator.current());
+            console.log(iterator.current().value._Name);
             iterator.next();
         }
     }
