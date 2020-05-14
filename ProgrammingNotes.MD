@@ -190,3 +190,11 @@ This is valuable because you may have two classes that both need to iterate seve
 It places the task of traversal on the iterator not on the aggregate.
 
 Single Responsibility - a class should have only one reason to change.
+
+Composite pattern - allows you to build structures of objects in the form of trees that contain both compositions of objects and individual objects as nodes.
+
+Client, component, leaf, composite.
+
+Component contains leafs and composites.
+Composites hold sets of children that may either be leaf or more components. This creates a recursive tree structure.
+https://app.diagrams.net/?libs=general;uml#G1kIE_LPA2GjWHuRd69Nnme_Ct314qGZRb
