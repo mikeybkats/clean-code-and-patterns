@@ -127,7 +127,6 @@ export class Menu extends MenuComponent {
 
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
-            // console.log(iterator.current().value._Name);
             iterator.current().value.print();
             iterator.next();
         }
