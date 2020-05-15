@@ -2,7 +2,7 @@ import { DinnerMenu } from "./iterator.menuDinner";
 import { BreakfastMenu } from "./iterator.menuBreakfast";
 import { Iterator } from "./iterator.menuIterator";
 import { IMenuItem } from "./iterator.menuItems.props";
-import { ArrayList } from "./iterator.arrayList";
+import { ArrayList } from "./arrayList";
 
 class MenuServer {
     private dinnerMenu: DinnerMenu;

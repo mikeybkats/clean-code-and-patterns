@@ -1,4 +1,5 @@
-import { Menu, MenuItem, IMenuProps } from "./composite.menu";
+import { Menu, MenuItem, IMenuProps, MenuComponent } from "./composite.menu";
+import { BreakfastMenu } from "./composite.menuBreakfast";
 
 class MyMenu extends Menu {
     constructor(props: IMenuProps) {
@@ -20,6 +21,24 @@ class MyMenu extends Menu {
                 vegetarian: false,
             })
         );
+
+        this.add(
+            new BreakfastMenu({
+                name: "Breakfast Menu",
+                description: "Served from 7am to 11am daily.",
+            })
+        );
+    }
+}
+
+class Waitress {
+    private allMenus: MenuComponent;
+    constructor(menu: MenuComponent) {
+        this.allMenus = menu;
+    }
+
+    public print(): void {
+        this.allMenus.print();
     }
 }
 
@@ -28,10 +47,6 @@ const thursdayMenu = new MyMenu({
     description: "Thursday night dinner.",
 });
 
-thursdayMenu.print();
+const ourWaitress = new Waitress(thursdayMenu);
 
-// const fries = thursdayMenu.getChild(0);
-
-// thursdayMenu.remove(fries);
-
-// thursdayMenu.print();
+ourWaitress.print();

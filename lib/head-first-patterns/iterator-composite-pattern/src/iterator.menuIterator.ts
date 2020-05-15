@@ -1,4 +1,4 @@
-import { ArrayList } from "./iterator.arrayList";
+import { ArrayList } from "./arrayList";
 import { IMenuItem } from "./iterator.menuItems.props";
 
 // IIteratorNode conforms to javascripts definition of iteration object:

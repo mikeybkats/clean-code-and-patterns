@@ -1,5 +1,5 @@
-import { IMenuComponent, MenuComponent } from "./composite.menu";
-import { ArrayList } from "./iterator.arrayList";
+import { MenuComponent } from "./composite.menu";
+import { ArrayList } from "./arrayList";
 
 interface IIteratorNode<T> {
     done: boolean;

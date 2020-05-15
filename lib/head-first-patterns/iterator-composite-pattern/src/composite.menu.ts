@@ -1,4 +1,4 @@
-import { ArrayList } from "./iterator.arrayList";
+import { ArrayList } from "./arrayList";
 import { IMenuItem } from "./iterator.menuItems.props";
 import { ArrayListComponentIterator, Iterator } from "./composite.iterator";
 
@@ -110,10 +110,17 @@ export class Menu extends MenuComponent {
         this.menuComponents.remove(menu);
     }
 
+    /**
+     * Allows the user to add menu components to the menuComponents list.
+     * @param menu is a MenuComponent, which means that a Menu or MenuItem can be added to the menuComponents list.
+     */
     public add(menu: MenuComponent): void {
         this.menuComponents.add(menu);
     }
 
+    /**
+     *  Prints the name and description of the Menu. Also prints the values of all MenuComponents in the menuComponents list.
+     */
     public print(): void {
         console.log(`${this._Name} \n${this._Description}`);
         console.log("----\n");

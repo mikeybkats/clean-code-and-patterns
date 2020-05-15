@@ -1,5 +1,5 @@
 import { IMenuItem } from "./iterator.menuItems.props";
-import { ArrayList } from "./iterator.arrayList";
+import { ArrayList } from "./arrayList";
 import { ArrayListMenuIterator, Iterator } from "./iterator.menuIterator";
 
 class BreakfastMenu {
