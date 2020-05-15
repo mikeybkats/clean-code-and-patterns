@@ -71,12 +71,9 @@ export class MenuItem extends MenuComponent {
     }
 
     public print(): void {
-        console.log({
-            name: this._Name,
-            description: this._Description,
-            price: this._Price,
-            vegetarian: this._Vegetarian,
-        });
+        console.log(
+            `name: ${this._Name} \ndescription: ${this._Description} \nprice: ${this._Price} \nvegetarian: ${this._Vegetarian} \n`
+        );
     }
 }
 
@@ -118,9 +115,13 @@ export class Menu extends MenuComponent {
     }
 
     public print(): void {
+        console.log(`${this._Name} \n${this._Description}`);
+        console.log("----\n");
+
         const iterator = this.createIterator();
         while (iterator.hasNext()) {
-            console.log(iterator.current().value._Name);
+            // console.log(iterator.current().value._Name);
+            iterator.current().value.print();
             iterator.next();
         }
     }

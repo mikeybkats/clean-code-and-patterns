@@ -23,17 +23,15 @@ class MyMenu extends Menu {
     }
 }
 
-// const thursdayMenu = new MyMenu({
-//     name: "Michael's menu",
-//     description: "Thursday night dinner.",
-// });
+const thursdayMenu = new MyMenu({
+    name: "Michael's menu",
+    description: "Thursday night dinner.",
+});
 
-// console.log("Menu: ");
-// thursdayMenu.print();
+thursdayMenu.print();
 
 // const fries = thursdayMenu.getChild(0);
 
 // thursdayMenu.remove(fries);
 
-// console.log("Menu: ");
 // thursdayMenu.print();
