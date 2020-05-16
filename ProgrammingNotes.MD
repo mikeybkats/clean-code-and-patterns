@@ -74,6 +74,8 @@ Similar to abstraction. Subclasses inherit the methods of the base class.
 
 ## chapter 1 - the strategy pattern
 
+**_The Strategy Pattern_** - defines a family of algorithms, encapsulate each one, and makes them interchangeable. Strategy lets the algorithm vary independently, from the clients that use it.
+
 OO Principles:
 
 **_Encapsulate what varies_**
@@ -198,3 +200,5 @@ Client, component, leaf, composite.
 Component contains leafs and composites.
 Composites hold sets of children that may either be leaf or more components. This creates a recursive tree structure.
 https://app.diagrams.net/?libs=general;uml#G1kIE_LPA2GjWHuRd69Nnme_Ct314qGZRb
+
+OO Principle - A class should have only one reason to change.
