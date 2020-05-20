@@ -1,18 +1,8 @@
-import { Menu, MenuItem, IMenuProps, MenuComponent } from "./composite.menu";
+import { Menu } from "./composite.menu";
 import { BreakfastMenu } from "./composite.menuBreakfast";
 import { SpecialMenu } from "./composite.menuSpecial";
 import { DinnerMenu } from "./composite.dinnerMenu";
-
-class Waitress {
-    private allMenus: MenuComponent;
-    constructor(menu: MenuComponent) {
-        this.allMenus = menu;
-    }
-
-    public print(): void {
-        this.allMenus.print();
-    }
-}
+import { Waitress } from "./composite.waitress";
 
 const allMenus = new Menu({
     name: "All menus",
