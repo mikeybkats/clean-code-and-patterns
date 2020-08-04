@@ -30,3 +30,5 @@ allMenus.add(dinnerMenu);
 
 const ourWaitress = new Waitress(allMenus);
 ourWaitress.print();
+
+ourWaitress.printVegetarianMenus();
