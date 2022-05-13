@@ -52,7 +52,7 @@ export class ArrayListComponentIterator extends Iterator<
     }
 
     /**
-     * returns the next node
+     * returns the next node and advances one node.
      */
     public next(): MenuComponent {
         const menuItem = this._menuComponents.get(this._index).data;
