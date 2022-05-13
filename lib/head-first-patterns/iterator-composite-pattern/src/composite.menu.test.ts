@@ -1,4 +1,4 @@
-import { Menu, MenuItem, IMenuProps, MenuComponent } from "./composite.menu";
+import { Menu, MenuComponent } from "./composite.menu";
 import { BreakfastMenu } from "./composite.menuBreakfast";
 import { SpecialMenu } from "./composite.menuSpecial";
 import { DinnerMenu } from "./composite.dinnerMenu";

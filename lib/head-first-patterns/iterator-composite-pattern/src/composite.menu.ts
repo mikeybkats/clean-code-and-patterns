@@ -90,7 +90,19 @@ export class Menu extends MenuComponent {
     constructor(props: IMenuProps) {
         super();
         this.name = props.name;
-        this.description = props.description;
+        this.description = 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        props.description;
         this.menuComponents = new ArrayList<MenuComponent>();
     }
 

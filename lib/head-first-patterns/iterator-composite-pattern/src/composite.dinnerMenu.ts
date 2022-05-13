@@ -12,7 +12,6 @@ class DinnerMenu extends Menu {
                 vegetarian: false,
             })
         );
-
         this.add(
             new MenuItem({
                 name: "Ma Po Tofu",
